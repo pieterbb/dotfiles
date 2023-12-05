@@ -1,0 +1,23 @@
+# Dotfiles 2023
+
+========
+
+## Install Homebrew & Git
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install git
+```
+
+## Clone this Repo
+
+```
+git clone git@github.com:pieterbb/dotfiles_2023.git ~/.dotfiles
+```
+
+## Run setup script
+
+```
+zsh ~/.dotfiles/setup.zsh
+```

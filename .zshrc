@@ -53,7 +53,7 @@ alias gw="commit wip"
 
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
-source "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+source ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -73,4 +73,4 @@ clear
 
 
 
-source "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+source ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
