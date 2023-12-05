@@ -5,7 +5,7 @@
 
 # git clone https://github.com/thenameiswiiwin/dotfiles-2.git ~/.dotfiles
 
-echo "Hello $(whoami)! Let's get you set up."
+echo "Hello $(whoami)! Let's get you set up.\n"
 
 cd ~
 mkdir -p ~/code/projects
@@ -50,10 +50,13 @@ brew install coreutils
 # NodeJS 
 brew install node
 brew install nvm
+
 brew tap oven-sh/bun # for macOS and Linux
 brew install bun
 
 brew install python
+brew install rust
+
 brew install git
 brew install ffmpeg
 brew install wget
@@ -71,6 +74,8 @@ brew install ripgrep
 # brew install --cask vlc
 # brew install --cask whatsapp
 # brew install --cask focus
+# brew install --cask calibre
+brew install --cask db-browser-for-sqlite
 brew install --cask raycast
 brew install --cask google-chrome
 brew install --cask firefox
@@ -88,7 +93,7 @@ brew install --cask font-fira-mono-nerd-font
 
 
 # Install the oh-my-zsh spaceship theme
-npm install -g spaceship-zsh-theme
+npm install -g spaceship-zsh-theme # This is broken at the moment
 
 
 # ---------------------------------------------
@@ -160,21 +165,6 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Show only open applications in the Dock
 defaults write com.apple.dock static-only -bool true
 
-# Privacy: don’t send search queries to Apple
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
-
-# Hide Safari’s bookmarks bar by default
-defaults write com.apple.Safari ShowFavoritesBar -bool false
-
-# Hide Safari’s sidebar in Top Sites
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
-
-# Disable Safari’s thumbnail cache for History and Top Sites
-defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
-
-# Remove useless icons from Safari’s bookmarks bar
-defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
@@ -200,10 +190,11 @@ echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed2
 
 ssh-add -K ~/.ssh/id_ed25519
 
-echo "\n \nDone! \n \n"
+echo "\nDone! \n"
 
-echo "Login to Chrome to sync settings, login in to vscode to sync settings, check GitHub author config file, add SSH keys to GitHub and servers"
-echo "Login in to Visual Studio Code to sync settings"
-echo "Setup modifier keys for the keyboard in System Preferences > Keyboard"
-echo "Load settings & theme file in iTerm2"
-echo "run pbcopy < ~/.ssh/id_ed25519.pub and paste that into GitHub"
+echo "Last steps:\n"
+echo "1. Login to Chrome with your account to setup sync"
+echo "2. Login in to Visual Studio Code with your GitHub account"
+echo "3. Setup modifier keys for the keyboard in System Preferences > Keyboard"
+echo "4. Load settings & theme file in iTerm2 from .dotfiles"
+echo "5. run pbcopy < ~/.ssh/id_ed25519.pub and paste your SSH key in GitHub"
