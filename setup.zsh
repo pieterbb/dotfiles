@@ -1,10 +1,5 @@
 #!/usr/bin/env zsh
 
-# Install Homebrew & git with Homebrew
-# Git clone this repo into home directory and run this script
-
-# git clone https://github.com/thenameiswiiwin/dotfiles-2.git ~/.dotfiles
-
 echo "Hello $(whoami)! Let's get you set up.\n"
 
 cd ~
@@ -75,9 +70,10 @@ brew install ripgrep
 # brew install --cask whatsapp
 # brew install --cask focus
 # brew install --cask calibre
-brew install --cask db-browser-for-sqlite
-brew install --cask raycast
 brew install --cask google-chrome
+brew install --cask visual-studio-code
+brew install --cask raycast
+brew install --cask db-browser-for-sqlite
 brew install --cask firefox
 brew install --cask rectangle
 brew install --cask spotify
@@ -87,7 +83,6 @@ brew install --cask postman
 brew install --cask keka
 brew install --cask sublime-text
 brew install --cask obsidian
-brew install --cask visual-studio-code
 brew install --cask sourcetree
 brew install --cask font-fira-mono-nerd-font
 
@@ -198,3 +193,4 @@ echo "2. Login in to Visual Studio Code with your GitHub account"
 echo "3. Setup modifier keys for the keyboard in System Preferences > Keyboard"
 echo "4. Load settings & theme file in iTerm2 from .dotfiles"
 echo "5. run pbcopy < ~/.ssh/id_ed25519.pub and paste your SSH key in GitHub"
+echo "6. Reboot for all settings to take effect"

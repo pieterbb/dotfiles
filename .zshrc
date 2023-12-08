@@ -11,9 +11,13 @@ SPACESHIP_BATTERY_ALWAYS_SHOW=false
 # Alias
 alias downloads="cd ~/Downloads"
 alias home="cd ~"
-alias cde="cd ~/code"
-alias scratch="cd ~/code/scratch"
+alias prj="cd ~/code/projects"
+alias plg="cd ~/code/playground"
+alias plgi='f() { mkdir -p ~/code/playground/"$1" && cd ~/code/playground/"$1"; }; f'
 alias dotfiles="cd ~/.dotfiles && ls -a"
+
+alias next-init='f() { bunx create-next-app ~/code/playground/"$1" --eslint --app --src-dir src --use-bun --ts --tailwind --import-alias @; cd ~/code/playground/"$1" && code .; }; f'
+
 
 alias nrs="npm run start"
 alias nrd="npm run dev"
@@ -24,7 +28,7 @@ alias pn=pnpm
 alias bn=bun
 alias bnx=bunx
 alias bnd="bun dev"
-alias cna="bunx create-next-app"
+alias cna="bunx create-next-app@latest"
 alias nv="nvim ."
 
 alias nvim-config="nvim ~/.config/nvim"
@@ -51,7 +55,7 @@ alias gu="git restore --staged ."
 alias gw="commit wip"
 
 
-plugins=(git)
+plugins=(git zsh-interactive-cd)
 source $ZSH/oh-my-zsh.sh
 source ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 
@@ -70,7 +74,6 @@ export NVM_DIR="$HOME/.nvm"
 
 
 clear
-
 
 
 source ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme

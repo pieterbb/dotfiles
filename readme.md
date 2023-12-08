@@ -15,9 +15,14 @@ brew install git
 ```
 git clone git@github.com:pieterbb/dotfiles_2023.git ~/.dotfiles
 ```
-
+    
 ## Run setup script
 
 ```
 zsh ~/.dotfiles/setup.zsh
 ```
+
+## Todo:
+
+- Automatically remap esc to capslock in settings
+- The folders are not created with the right permissions
