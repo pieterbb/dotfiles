@@ -13,7 +13,7 @@ brew install git
 ## Clone this Repo
 
 ```
-git clone git@github.com:pieterbb/dotfiles_2023.git ~/.dotfiles
+git clone git@github.com:pieterbb/dotfiles_mac.git ~/.dotfiles
 ```
     
 ## Run setup script
