@@ -1,4 +1,4 @@
-# Dotfiles 2023
+# Dotfiles for Mac
 
 ========
 
