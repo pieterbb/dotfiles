@@ -2,6 +2,10 @@
 
 echo "Hello $(whoami)! Let's get you set up.\n"
 
+# Ask for the administrator password upfront
+sudo -v
+
+
 cd ~
 mkdir -p ~/code/projects
 mkdir -p ~/code/playground
@@ -23,6 +27,9 @@ ln -s ~/.dotfiles/.zshrc ~/.zshrc
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
 rm -rf ~/.vimrc
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
+
+# disable message of the day in Terminal
+touch ~/.hushlogin
 
 rm -rf ~/.config/nvim
 ln -s ~/.dotfiles/nvim ~/.config/nvim
@@ -50,7 +57,8 @@ brew tap oven-sh/bun # for macOS and Linux
 brew install bun
 
 brew install python
-brew install rust
+
+# brew install rust
 
 brew install git
 brew install ffmpeg
@@ -59,6 +67,7 @@ brew install fzf
 brew install neovim
 brew install ripgrep
 
+brew install spaceship
 
 # ---------------------------------------------
 # Tools I use often
@@ -70,10 +79,11 @@ brew install ripgrep
 # brew install --cask whatsapp
 # brew install --cask focus
 # brew install --cask calibre
+# brew install --cask db-browser-for-sqlite
 brew install --cask google-chrome
+brew install --cask github
 brew install --cask visual-studio-code
 brew install --cask raycast
-brew install --cask db-browser-for-sqlite
 brew install --cask firefox
 brew install --cask rectangle
 brew install --cask spotify
@@ -84,12 +94,8 @@ brew install --cask keka
 brew install --cask sublime-text
 brew install --cask obsidian
 brew install --cask sourcetree
-brew install --cask font-fira-mono-nerd-font
 
-
-# Install the oh-my-zsh spaceship theme
-npm install -g spaceship-zsh-theme # This is broken at the moment
-
+brew tap homebrew/cask-fonts && brew install --cask font-fira-mono-nerd-font
 
 # ---------------------------------------------
 # OSX Defaults
@@ -160,14 +166,62 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Show only open applications in the Dock
 defaults write com.apple.dock static-only -bool true
 
-
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
 
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# Use list view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `glyv`
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+# Show the ~/Library folder
+chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+    General -bool true \
+    OpenWith -bool true \
+    Privileges -bool true
+
+# Make Dock icons of hidden applications translucent
+defaults write com.apple.dock showhidden -bool true
+
+# Don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
+
+# Wipe all (default) app icons from the Dock
+# This is only really useful when setting up a new Mac, or if you don’t use
+# the Dock to launch apps.
+# defaults write com.apple.dock persistent-apps -array
+
+###############################################################################
+# Mail                                                                        #
+###############################################################################
+
+# Disable send and reply animations in Mail.app
+defaults write com.apple.mail DisableReplyAnimations -bool true
+defaults write com.apple.mail DisableSendAnimations -bool true
+
+# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+# Disable inline attachments (just show the icons)
+defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
+
+# Enable the Develop menu and the Web Inspector in Safari
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+# Don’t display the annoying prompt when quitting iTerm
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 echo "Generating a new SSH key for GitHub..."
 

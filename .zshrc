@@ -2,11 +2,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="spaceship"
-SPACESHIP_PROMPT_SYMBOL="❯"
-SPACESHIP_PACKAGE_SHOW=false
-SPACESHIP_BATTERY_SHOW=false
-SPACESHIP_BATTERY_ALWAYS_SHOW=false
 
 # Alias
 alias downloads="cd ~/Downloads"
@@ -15,9 +10,12 @@ alias prj="cd ~/code/projects"
 alias plg="cd ~/code/playground"
 alias plgi='f() { mkdir -p ~/code/playground/"$1" && cd ~/code/playground/"$1"; }; f'
 alias dotfiles="cd ~/.dotfiles && ls -a"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
-alias next-init='f() { bunx create-next-app ~/code/playground/"$1" --eslint --app --src-dir src --use-bun --ts --tailwind --import-alias @; cd ~/code/playground/"$1" && code .; }; f'
-
+alias next-init='f() { bunx create-next-app ~/code/playground/"$1" --eslint --app --use-bun --ts --tailwind; cd ~/code/playground/"$1" && code .; }; f'
 
 alias nrs="npm run start"
 alias nrd="npm run dev"
@@ -39,6 +37,7 @@ alias zsh-source="source ~/.zshrc"
 
 alias hosts='sudo vi /etc/hosts'
 alias flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
+alias localip="ipconfig getifaddr en0"
 
 # Shortcuts
 alias g="git"
@@ -55,9 +54,8 @@ alias gu="git restore --staged ."
 alias gw="commit wip"
 
 
-plugins=(git zsh-interactive-cd)
+plugins=(git zsh-interactive-cd zsh-autocomplete)
 source $ZSH/oh-my-zsh.sh
-source ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -72,8 +70,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+source "/opt/homebrew/opt/spaceship/spaceship.zsh"
 
 clear
 
-
-source ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
+# bun completions
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
