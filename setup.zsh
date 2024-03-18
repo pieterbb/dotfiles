@@ -7,6 +7,7 @@ sudo -v
 
 
 cd ~
+
 mkdir -p ~/code/projects
 mkdir -p ~/code/playground
 
@@ -75,11 +76,12 @@ brew install spaceship
 # brew install --cask notion
 # brew install --cask telegram
 # brew install --cask cleanshot
-# brew install --cask vlc
 # brew install --cask whatsapp
 # brew install --cask focus
 # brew install --cask calibre
 # brew install --cask db-browser-for-sqlite
+# brew install --cask sourcetree
+brew install --cask vlc
 brew install --cask google-chrome
 brew install --cask github
 brew install --cask visual-studio-code
@@ -91,9 +93,12 @@ brew install --cask iterm2
 brew install --cask docker
 brew install --cask postman
 brew install --cask keka
+brew install --cask AltTab
+brew install --cask hiddenbar
+brew install --cask sloth
+brew install stats
 brew install --cask sublime-text
 brew install --cask obsidian
-brew install --cask sourcetree
 
 brew tap homebrew/cask-fonts && brew install --cask font-fira-mono-nerd-font
 
