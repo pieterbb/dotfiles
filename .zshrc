@@ -9,7 +9,10 @@ alias home="cd ~"
 alias prj="cd ~/code/projects"
 alias plg="cd ~/code/playground"
 alias plgi='f() { mkdir -p ~/code/playground/"$1" && cd ~/code/playground/"$1"; }; f'
+alias scratch='f() { rand_id=$(date +%s | sha256sum | base64 | head -c 8); mkdir -p ~/code/playground/scratch"$rand_id" && cd ~/code/playground/scratch"$rand_id" && bun init -y  && code .}; f'
+
 alias dotfiles="cd ~/.dotfiles && ls -a"
+alias dot="cd ~/.dotfiles && code ."
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -27,6 +30,8 @@ alias bn=bun
 alias bnx=bunx
 alias bnd="bun dev"
 alias cna="bunx create-next-app@latest"
+alias bni="bun run index.ts"
+
 alias nv="nvim ."
 
 alias nvim-config="nvim ~/.config/nvim"
@@ -77,3 +82,8 @@ clear
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+# Enable vi mode
+bindkey -v
+
+source /Users/pieter/.config/broot/launcher/bash/br

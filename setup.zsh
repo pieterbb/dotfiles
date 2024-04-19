@@ -32,16 +32,12 @@ ln -s ~/.dotfiles/.vimrc ~/.vimrc
 # disable message of the day in Terminal
 touch ~/.hushlogin
 
-rm -rf ~/.config/nvim
-ln -s ~/.dotfiles/nvim ~/.config/nvim
-
 echo "Upgrading brew stuff..."
 # Make sure we’re using the latest Homebrew
 brew update
 
 # Upgrade any already-installed formulae
 brew upgrade
-
 
 echo "Brew installing stuff"
 # ---------------------------------------------
@@ -59,7 +55,7 @@ brew install bun
 
 brew install python
 
-# brew install rust
+brew install rust
 
 brew install git
 brew install ffmpeg
@@ -82,11 +78,11 @@ brew install spaceship
 # brew install --cask db-browser-for-sqlite
 # brew install --cask sourcetree
 brew install --cask vlc
+brew install --cask firefox
 brew install --cask google-chrome
 brew install --cask github
 brew install --cask visual-studio-code
 brew install --cask raycast
-brew install --cask firefox
 brew install --cask rectangle
 brew install --cask spotify
 brew install --cask iterm2
@@ -101,6 +97,33 @@ brew install --cask sublime-text
 brew install --cask obsidian
 
 brew tap homebrew/cask-fonts && brew install --cask font-fira-mono-nerd-font
+
+
+
+
+# ---------------------------------------------
+# Create SSH key
+# ---------------------------------------------
+echo "Generating a new SSH key for GitHub..."
+
+# Check if SSH key already exists
+if [[ -f ~/.ssh/id_ed25519 ]]; then
+    echo "SSH key already exists. Skipping key generation."
+else
+    ssh-keygen -t ed25519 -C "$1" -f ~/.ssh/id_ed25519
+fi
+
+eval "$(ssh-agent -s)"
+
+touch ~/.ssh/config
+echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee ~/.ssh/config
+
+ssh-add -K ~/.ssh/id_ed25519
+
+echo "\nDone! \n"
+
+
+
 
 # ---------------------------------------------
 # OSX Defaults
@@ -228,23 +251,6 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
-echo "Generating a new SSH key for GitHub..."
-
-# Check if SSH key already exists
-if [[ -f ~/.ssh/id_ed25519 ]]; then
-    echo "SSH key already exists. Skipping key generation."
-else
-    ssh-keygen -t ed25519 -C "$1" -f ~/.ssh/id_ed25519
-fi
-
-eval "$(ssh-agent -s)"
-
-touch ~/.ssh/config
-echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee ~/.ssh/config
-
-ssh-add -K ~/.ssh/id_ed25519
-
-echo "\nDone! \n"
 
 echo "Last steps:\n"
 echo "1. Login to Chrome with your account to setup sync"

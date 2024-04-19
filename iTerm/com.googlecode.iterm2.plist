@@ -707,13 +707,17 @@
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>NeverWarnAboutShortLivedSessions_559B4D03-2508-46DD-A38B-B775829ED06B</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_559B4D03-2508-46DD-A38B-B775829ED06B_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
 			<key>ASCII Ligatures</key>
-			<true/>
+			<false/>
 			<key>Allow Title Setting</key>
 			<true/>
 			<key>Ambiguous Double Width</key>
@@ -1652,6 +1656,16 @@
 	<integer>48</integer>
 	<key>TerminalVMargin</key>
 	<integer>48</integer>
+	<key>ToolbeltTools</key>
+	<array>
+		<string>Profiles</string>
+		<string>Captured Output</string>
+		<string>Command History</string>
+		<string>Jobs</string>
+		<string>Paste History</string>
+		<string>Recent Directories</string>
+		<string>Snippets</string>
+	</array>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>findMode_iTerm</key>
