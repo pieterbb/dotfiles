@@ -25,3 +25,4 @@ zsh ~/.dotfiles/setup.zsh
 - Automatically remap esc to capslock in settings
 - The folders are not created with the right permissions, I've added sudo. Does this fix it?
 - Iterm2 settings don't load properly on new setup
+- Something to set the default favorites folders

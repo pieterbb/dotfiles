@@ -85,5 +85,3 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # Enable vi mode
 bindkey -v
-
-source /Users/pieter/.config/broot/launcher/bash/br

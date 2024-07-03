@@ -54,7 +54,7 @@ brew tap oven-sh/bun # for macOS and Linux
 brew install bun
 
 brew install python
-
+brew install go
 brew install rust
 
 brew install git
@@ -77,6 +77,7 @@ brew install spaceship
 # brew install --cask calibre
 # brew install --cask db-browser-for-sqlite
 # brew install --cask sourcetree
+brew install --cask spotify
 brew install --cask vlc
 brew install --cask firefox
 brew install --cask google-chrome
@@ -84,17 +85,18 @@ brew install --cask github
 brew install --cask visual-studio-code
 brew install --cask raycast
 brew install --cask rectangle
-brew install --cask spotify
 brew install --cask iterm2
 brew install --cask docker
 brew install --cask postman
+brew install --cask proxyman
 brew install --cask keka
 brew install --cask AltTab
 brew install --cask hiddenbar
 brew install --cask sloth
-brew install stats
+brew install --cask stats
 brew install --cask sublime-text
 brew install --cask obsidian
+brew install --cask orbstack
 
 brew tap homebrew/cask-fonts && brew install --cask font-fira-mono-nerd-font
 
@@ -128,6 +130,9 @@ echo "\nDone! \n"
 # ---------------------------------------------
 # OSX Defaults
 # ---------------------------------------------
+
+# Disable the "Are you sure you want to open this application?" dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Expanding the save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -227,26 +232,8 @@ defaults write com.apple.dock show-recents -bool false
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you don’t use
 # the Dock to launch apps.
-# defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock persistent-apps -array
 
-###############################################################################
-# Mail                                                                        #
-###############################################################################
-
-# Disable send and reply animations in Mail.app
-defaults write com.apple.mail DisableReplyAnimations -bool true
-defaults write com.apple.mail DisableSendAnimations -bool true
-
-# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
-defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-# Disable inline attachments (just show the icons)
-defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
-
-# Enable the Develop menu and the Web Inspector in Safari
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
