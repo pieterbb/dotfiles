@@ -64,6 +64,9 @@ brew install fzf
 brew install neovim
 brew install ripgrep
 
+brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
+
 brew install spaceship
 
 # ---------------------------------------------
