@@ -12,13 +12,6 @@ mkdir -p ~/code/projects
 mkdir -p ~/code/playground
 
 
-# Check for Oh My Zsh and install if we don't have it
-if [ -d ~/.oh-my-zsh ]; then
-	echo "oh-my-zsh is installed"
- else
- 	echo "oh-my-zsh is not installed, attempting to install"
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
 
 echo "Creating symlinks for dotfiles..."
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
@@ -40,6 +33,7 @@ brew update
 brew upgrade
 
 echo "Brew installing stuff"
+
 # ---------------------------------------------
 # Programming Languages and Frameworks
 # ---------------------------------------------
@@ -48,8 +42,8 @@ brew install coreutils
 
 # NodeJS 
 brew install node
+brew install deno
 brew install nvm
-
 brew tap oven-sh/bun # for macOS and Linux
 brew install bun
 
@@ -57,12 +51,18 @@ brew install python
 brew install go
 brew install rust
 
+brew install helm
+brew install kubernetes-cli
+
 brew install git
 brew install ffmpeg
 brew install wget
 brew install fzf
-brew install neovim
+brew install jq
+
 brew install ripgrep
+brew install zellij
+brew install btop
 
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
@@ -77,29 +77,29 @@ brew install spaceship
 # brew install --cask cleanshot
 # brew install --cask whatsapp
 # brew install --cask focus
+# brew install --cask qbittorrent
 # brew install --cask calibre
 # brew install --cask db-browser-for-sqlite
-# brew install --cask sourcetree
-brew install --cask spotify
+# brew install --cask spotify
 brew install --cask vlc
 brew install --cask firefox
 brew install --cask google-chrome
+brew install --cask chromium
 brew install --cask github
 brew install --cask visual-studio-code
+brew install --cask cursor
 brew install --cask raycast
+brew install --cask hoppscotch
 brew install --cask rectangle
+brew install --cask mockoon
 brew install --cask iterm2
 brew install --cask docker
-brew install --cask postman
-brew install --cask proxyman
 brew install --cask keka
-brew install --cask AltTab
 brew install --cask hiddenbar
 brew install --cask sloth
 brew install --cask stats
 brew install --cask sublime-text
 brew install --cask obsidian
-brew install --cask orbstack
 
 brew tap homebrew/cask-fonts && brew install --cask font-fira-mono-nerd-font
 
