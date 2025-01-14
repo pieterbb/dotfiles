@@ -5,13 +5,10 @@ echo "Hello $(whoami)! Let's get you set up.\n"
 # Ask for the administrator password upfront
 sudo -v
 
-
 cd ~
 
 mkdir -p ~/code/projects
 mkdir -p ~/code/playground
-
-
 
 echo "Creating symlinks for dotfiles..."
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
@@ -46,6 +43,7 @@ brew install deno
 brew install nvm
 brew tap oven-sh/bun # for macOS and Linux
 brew install bun
+brew install pnpm
 
 brew install python
 brew install go
@@ -53,6 +51,7 @@ brew install rust
 
 brew install helm
 brew install kubernetes-cli
+brew install kubectx
 
 brew install git
 brew install ffmpeg
@@ -63,9 +62,14 @@ brew install jq
 brew install ripgrep
 brew install zellij
 brew install btop
+brew install eza
+brew install yazi
+brew install bat
+brew install zoxide
 
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
+brew install zsh-you-should-use
 
 brew install spaceship
 
@@ -92,14 +96,14 @@ brew install --cask raycast
 brew install --cask hoppscotch
 brew install --cask rectangle
 brew install --cask mockoon
-brew install --cask iterm2
+brew install --cask ghostty
 brew install --cask docker
 brew install --cask keka
-brew install --cask hiddenbar
 brew install --cask sloth
 brew install --cask stats
 brew install --cask sublime-text
 brew install --cask obsidian
+brew install --cask shottr
 
 brew tap homebrew/cask-fonts && brew install --cask font-fira-mono-nerd-font
 
@@ -126,8 +130,6 @@ echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed2
 ssh-add -K ~/.ssh/id_ed25519
 
 echo "\nDone! \n"
-
-
 
 
 # ---------------------------------------------
@@ -246,6 +248,5 @@ echo "Last steps:\n"
 echo "1. Login to Chrome with your account to setup sync"
 echo "2. Login in to Visual Studio Code with your GitHub account"
 echo "3. Setup modifier keys for the keyboard in System Preferences > Keyboard"
-echo "4. Load settings & theme file in iTerm2 from .dotfiles"
-echo "5. run pbcopy < ~/.ssh/id_ed25519.pub and paste your SSH key in GitHub"
-echo "6. Reboot for all settings to take effect"
+echo "4. run pbcopy < ~/.ssh/id_ed25519.pub and paste your SSH key in GitHub"
+echo "5. Reboot for all settings to take effect"
