@@ -192,6 +192,10 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
+# Restart Finder
+killall Finder
+
+
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
@@ -233,8 +237,22 @@ defaults write com.apple.finder _FXSortFoldersFirst -bool true
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `glyv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
+# Show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+# Show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Wipe all (default) app icons from the Dock
+defaults write com.apple.dock persistent-apps -array
+killall Dock
+
+
 # Show the ~/Library folder
-chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+chflags nohidden ~/Library
+
+# Show the /Volumes folder
+sudo chflags nohidden /Volumes
+
 
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
     General -bool true \
