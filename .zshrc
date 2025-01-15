@@ -60,8 +60,6 @@ alias flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
 alias localip="ipconfig getifaddr en0"
 
 # Git
-
-
 alias gs="git status"
 alias gb="git branch"
 alias gc="git add . && git commit -m"

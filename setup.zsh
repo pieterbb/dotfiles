@@ -148,6 +148,16 @@ ssh-add -K ~/.ssh/id_ed25519
 echo "\nDone! \n"
 
 
+
+# ---------------------------------------------
+# Ghostty config
+# ---------------------------------------------
+# Backup (optional)
+mv "$HOME/Library/Application Support/com.mitchellh.ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.backup"
+
+# Create symlink
+ln -s ~/.dotfiles/ghostty_config "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+
 # ---------------------------------------------
 # OSX Defaults
 # ---------------------------------------------
