@@ -1,6 +1,20 @@
 #!/usr/bin/env zsh
 
+# Parse command line arguments
+WORK_MODE=false
+for arg in "$@"; do
+    case $arg in
+        --work)
+            WORK_MODE=true
+            shift
+            ;;
+    esac
+done
+
 echo "Hello $(whoami)! Let's get you set up.\n"
+if [[ $WORK_MODE == true ]]; then
+    echo "Setting up in work mode (minimal installation)..."
+fi
 
 # Ask for the administrator password upfront
 sudo -v
@@ -37,7 +51,7 @@ echo "Brew installing stuff"
 # Core Utils
 brew install coreutils
 
-# NodeJS 
+# NodeJS
 brew install node
 brew install deno
 brew install nvm
@@ -76,16 +90,6 @@ brew install spaceship
 # ---------------------------------------------
 # Tools I use often
 # ---------------------------------------------
-# brew install --cask notion
-# brew install --cask telegram
-# brew install --cask cleanshot
-# brew install --cask whatsapp
-# brew install --cask focus
-# brew install --cask qbittorrent
-# brew install --cask calibre
-# brew install --cask db-browser-for-sqlite
-# brew install --cask spotify
-brew install --cask vlc
 brew install --cask firefox
 brew install --cask google-chrome
 brew install --cask chromium
@@ -108,6 +112,18 @@ brew install --cask shottr
 brew tap homebrew/cask-fonts && brew install --cask font-fira-mono-nerd-font
 
 
+if [[ $WORK_MODE == false ]]; then
+brew install --cask vlc
+brew install --cask notion
+brew install --cask telegram
+brew install --cask cleanshot
+brew install --cask whatsapp
+brew install --cask focus
+brew install --cask qbittorrent
+brew install --cask calibre
+brew install --cask db-browser-for-sqlite
+brew install --cask spotify
+fi
 
 
 # ---------------------------------------------
@@ -144,7 +160,7 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# Save screenshots to the Desktop (or elsewhere)
+# Save screenshots to the Downloads folder
 defaults write com.apple.screencapture location "${HOME}/Downloads"
 
 # Expand print panel by default
@@ -182,7 +198,7 @@ sudo nvram SystemAudioVolume=" "
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
-# For VSCode, enable keyrepeat with vim 
+# For VSCode, enable keyrepeat with vim
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
 # Disable press-and-hold for keys in favor of key repeat.
@@ -203,9 +219,6 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Show only open applications in the Dock
 defaults write com.apple.dock static-only -bool true
-
-# Prevent Time Machine from prompting to use new hard drives as backup volume
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -234,15 +247,9 @@ defaults write com.apple.dock showhidden -bool true
 # Don’t show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
 
-# Wipe all (default) app icons from the Dock
-# This is only really useful when setting up a new Mac, or if you don’t use
-# the Dock to launch apps.
-defaults write com.apple.dock persistent-apps -array
 
 
-# Don’t display the annoying prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
-
+echo "\nDone! \n"
 
 echo "Last steps:\n"
 echo "1. Login to Chrome with your account to setup sync"

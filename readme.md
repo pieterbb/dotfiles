@@ -17,12 +17,9 @@ git clone https://github.com/pieterbb/dotfiles.git ~/.dotfiles
 ## Run setup script
 
 ```zsh
-zsh ~/.dotfiles/setup.zsh
+zsh ~/.dotfiles/setup.zsh```
+
+Run the setup script with the `--work` flag to install only the tools I use for work.
+```zsh
+zsh ~/.dotfiles/setup.zsh --work
 ```
-
-## Todo:
-
-- Automatically remap esc to capslock in settings
-- The folders are not created with the right permissions, I've added sudo. Does this fix it?
-- Iterm2 settings don't load properly on new setup
-- Something to set the default favorites folders

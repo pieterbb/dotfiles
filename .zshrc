@@ -53,6 +53,7 @@ alias cat="bat"
 
 alias reload='source ~/.zshrc'
 alias zc='vim ~/.zshrc'
+alias zcl='vim ~/.zshrc_local'
 alias logline='git log --graph --pretty=tformat:"%Cred%h%Creset %C(bold blue)%<(20,trunc)%an%Creset %C(auto)%d%Creset %s %Cgreen(%cr) "'
 alias hosts='sudo vi /etc/hosts'
 alias flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
@@ -60,43 +61,6 @@ alias localip="ipconfig getifaddr en0"
 
 # Git
 
-# alias s='git status -sb'
-# alias ga='git add -A'
-# alias gap='ga -p'
-# alias gbr='git branch -v'
-# alias gch='git cherry-pick'
-# alias gcm='git commit -v --amend'
-# alias gco='git checkout'
-# alias gd='git diff -M'
-# alias gd.='git diff -M --color-words="."'
-# alias gdc='git diff --cached -M'
-# alias gdc.='git diff --cached -M --color-words="."'
-# alias gf='git fetch'
-# git_current_branch() {
-#   cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | sed -e 's/^.*refs\/heads\///'
-# }
-# alias glog='git log --date-order --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
-# alias gl='glog --graph'
-# alias gla='gl --all'
-# alias gm='git merge --no-ff'
-# alias gmf='git merge --ff-only'
-# alias gp='git push'
-# alias gpthis='gp origin $(git_current_branch)'
-# alias gpthis!='gp --set-upstream origin $(git_current_branch)'
-# alias grb='git rebase -p'
-# alias grba='git rebase --abort'
-# alias grbc='git rebase --continue'
-# alias grbi='git rebase -i'
-# alias gr='git reset'
-# alias grh='git reset --hard'
-# alias grsh='git reset --soft HEAD~'
-# alias grv='git remote -v'
-# alias gs='git show'
-# alias gs.='git show --color-words="."'
-# alias gst='git stash'
-# alias gstp='git stash pop'
-# alias gup='git pull'
-# alias gap='git add -p'
 
 alias gs="git status"
 alias gb="git branch"
@@ -155,3 +119,9 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # Enable vi mode
 bindkey -v
+
+
+# Load local configurations if they exist
+if [ -f "$HOME/.zshrc_local" ]; then
+    source "$HOME/.zshrc_local"
+fi
