@@ -1,0 +1,10 @@
+theme = catppuccin-mocha
+font-size = 16
+background-opacity = 0.95
+window-padding-x = 24
+window-padding-y = 24
+
+font-thicken = false
+window-save-state = always
+shell-integration-features = no-title
+window-step-resize = false
