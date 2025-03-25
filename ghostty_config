@@ -8,3 +8,5 @@ font-thicken = false
 window-save-state = always
 shell-integration-features = no-title
 window-step-resize = false
+
+macos-option-as-alt = true

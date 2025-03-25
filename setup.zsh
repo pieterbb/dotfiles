@@ -37,94 +37,18 @@ ln -s ~/.dotfiles/.vimrc ~/.vimrc
 touch ~/.hushlogin
 
 echo "Upgrading brew stuff..."
-# Make sure we’re using the latest Homebrew
+# Make sure we're using the latest Homebrew
 brew update
 
 # Upgrade any already-installed formulae
 brew upgrade
 
-echo "Brew installing stuff"
+echo "Installing packages from Brewfile..."
+# Set environment variable for brew bundle based on work mode
+export HOMEBREW_BUNDLE_WORK_MODE=$WORK_MODE
 
-# ---------------------------------------------
-# Programming Languages and Frameworks
-# ---------------------------------------------
-# Core Utils
-brew install coreutils
-
-# NodeJS
-brew install node
-brew install deno
-brew install nvm
-brew tap oven-sh/bun # for macOS and Linux
-brew install bun
-brew install pnpm
-
-brew install python
-brew install go
-brew install rust
-
-brew install helm
-brew install kubernetes-cli
-brew install kubectx
-
-brew install git
-brew install ffmpeg
-brew install wget
-brew install fzf
-brew install jq
-
-brew install ripgrep
-brew install zellij
-brew install btop
-brew install eza
-brew install yazi
-brew install bat
-brew install zoxide
-
-brew install zsh-autosuggestions
-brew install zsh-syntax-highlighting
-brew install zsh-you-should-use
-
-brew install spaceship
-
-# ---------------------------------------------
-# Tools I use often
-# ---------------------------------------------
-brew install --cask firefox
-brew install --cask google-chrome
-brew install --cask chromium
-brew install --cask github
-brew install --cask visual-studio-code
-brew install --cask cursor
-brew install --cask raycast
-brew install --cask hoppscotch
-brew install --cask rectangle
-brew install --cask mockoon
-brew install --cask ghostty
-brew install --cask docker
-brew install --cask keka
-brew install --cask sloth
-brew install --cask stats
-brew install --cask sublime-text
-brew install --cask obsidian
-brew install --cask shottr
-
-brew tap homebrew/cask-fonts && brew install --cask font-fira-mono-nerd-font
-
-
-if [[ $WORK_MODE == false ]]; then
-brew install --cask vlc
-brew install --cask notion
-brew install --cask telegram
-brew install --cask cleanshot
-brew install --cask whatsapp
-brew install --cask focus
-brew install --cask qbittorrent
-brew install --cask calibre
-brew install --cask db-browser-for-sqlite
-brew install --cask spotify
-fi
-
+# Install all packages from the Brewfile (in current directory)
+brew bundle
 
 # ---------------------------------------------
 # Create SSH key
@@ -147,16 +71,22 @@ ssh-add -K ~/.ssh/id_ed25519
 
 echo "\nDone! \n"
 
-
-
 # ---------------------------------------------
 # Ghostty config
 # ---------------------------------------------
-# Backup (optional)
-mv "$HOME/Library/Application Support/com.mitchellh.ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.backup"
+# Create config directory if it doesn't exist
+GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
+mkdir -p "$GHOSTTY_CONFIG_DIR"
+
+# Backup existing config (if it exists)
+if [[ -f "$GHOSTTY_CONFIG_DIR/config" ]]; then
+    echo "Backing up existing Ghostty config..."
+    mv "$GHOSTTY_CONFIG_DIR/config" "$GHOSTTY_CONFIG_DIR/config.backup"
+fi
 
 # Create symlink
-ln -s ~/.dotfiles/ghostty_config "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+echo "Creating symlink for Ghostty config..."
+ln -sf ~/.dotfiles/ghostty_config "$GHOSTTY_CONFIG_DIR/config"
 
 # ---------------------------------------------
 # OSX Defaults
@@ -263,7 +193,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
 
-# Don’t show recent applications in Dock
+# Don't show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
 
 
