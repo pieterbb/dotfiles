@@ -173,6 +173,7 @@ alias next-init='f() { bunx create-next-app ~/code/playground/"$1" --eslint --ap
 
 # Docker
 alias dc='docker-compose'
+alias d='docker'
 
 # Kubernetes
 alias k='kubectl'
@@ -243,7 +244,6 @@ source $HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh
 # Zoxide
 eval "$(zoxide init zsh)"
 
-# Haas
 
 #-------------------------------------
 # LOCAL CONFIGURATIONS
