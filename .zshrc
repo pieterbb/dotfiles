@@ -28,10 +28,10 @@ clear
 
 #zstyle :compinstall filename '~/.zshrc'
 
-#autoload -U +X compinit && compinit
-#autoload -U +X bashcompinit && bashcompinit
-#autoload -Uz compinit
-#compinit
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit
+compinit
 
 # End of lines added by compinstall
 
@@ -188,6 +188,7 @@ alias ports='lsof -i -P -n | grep LISTEN'
 alias code="cursor"
 alias v="vim"
 alias ff="fzf"
+alias bi="brew install"
 
 # Config files
 alias reload='source ~/.zshrc'
@@ -252,3 +253,4 @@ eval "$(zoxide init zsh)"
 if [ -f "$HOME/.dotfiles/.zshrc_local" ]; then
     source "$HOME/.dotfiles/.zshrc_local"
 fi
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
