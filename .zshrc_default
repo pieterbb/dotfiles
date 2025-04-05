@@ -1,0 +1,247 @@
+#!/usr/bin/env zsh
+
+#-------------------------------------
+# GENERAL SETTINGS
+#-------------------------------------
+# Larger history file
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
+# Don't save duplicates
+setopt HIST_IGNORE_ALL_DUPS
+# Share history between terminals
+setopt SHARE_HISTORY
+
+# Add timestamp to history
+setopt EXTENDED_HISTORY
+
+# Clear screen after loading
+clear
+
+#-------------------------------------
+# COMPLETION SETTINGS
+#-------------------------------------
+# The following lines were added by compinstall
+
+
+
+#zstyle :compinstall filename '~/.zshrc'
+
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit
+compinit
+
+# End of lines added by compinstall
+
+# Enable menu selection when pressing TAB multiple times
+zstyle ':completion:*' menu select
+
+# Case-insensitive matching
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+# Group matches by category
+zstyle ':completion:*' group-name ''
+
+# Nice colors for file completion
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Cache completions for speed
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.zsh/.zcompcache"
+
+# Format completion messages
+zstyle ':completion:*:descriptions' format '%F{green}-- %d --%f'
+zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}-- no matches --%f'
+
+# More attractive completion menu
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+
+
+# Use different colors for different file types in completion
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Load module for menu completion
+zmodload zsh/complist
+
+
+
+#-------------------------------------
+# KEY BINDINGS
+#-------------------------------------
+# Enable vi mode
+#bindkey -v
+
+# Add vim-like navigation in the completion menu
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
+# Navigate to parent directory with Alt+Up
+bindkey "^[[1;3A" cd-up
+cd-up() { cd ..; zle reset-prompt; }
+zle -N cd-up
+
+# Navigate to previously visited directory with Alt+Down
+bindkey "^[[1;3B" cd-back
+cd-back() { popd >/dev/null; zle reset-prompt; }
+zle -N cd-back
+
+# History search
+bindkey '^r' history-incremental-search-backward
+
+# Edit command in editor
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+#-------------------------------------
+# FUNCTIONS
+#-------------------------------------
+# Yazi file manager with directory tracking
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# CD with ls
+function cd() {
+  builtin cd "$@" && ls
+}
+
+# Create directory and cd into it simultaneously
+function mkcd() { mkdir -p "$1" && cd "$1"; }
+
+# Prettier git log with current branch
+function git-log-branch() {
+  git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all $(git symbolic-ref --short HEAD)
+}
+
+# Navigate to root of git repository
+function cdg() { cd "$(git rev-parse --show-toplevel 2>/dev/null || echo .)" }
+
+#-------------------------------------
+# ALIASES
+#-------------------------------------
+# Navigation
+alias downloads="cd ~/Downloads"
+alias home="cd ~"
+alias prj="cd ~/code/projects"
+alias plg="cd ~/code/playground"
+alias plgi='f() { mkdir -p ~/code/playground/"$1" && cd ~/code/playground/"$1"; }; f'
+alias scratch='f() { rand_id=$(date +%s | sha256sum | base64 | head -c 8); mkdir -p ~/code/playground/scratch"$rand_id" && cd ~/code/playground/scratch"$rand_id" && bun init -y  && code .}; f'
+alias dotfiles="cd ~/.dotfiles && ls -a"
+alias dot="cd ~/.dotfiles && code ."
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias -- -='cd -'
+
+# Git
+alias gs="git status"
+alias gb="git branch"
+alias gc="git add . && git commit -m"
+alias gd="git diff"
+alias gu="git restore --staged ."
+alias gw="commit wip"
+alias glb='git-log-branch'
+alias g="git"
+alias logline='git log --graph --pretty=tformat:"%Cred%h%Creset %C(bold blue)%<(20,trunc)%an%Creset %C(auto)%d%Creset %s %Cgreen(%cr) "'
+
+# Node/JavaScript tools
+alias nr="npm run"
+alias nrs="npm run start"
+alias nrd="npm run dev"
+alias nrb="npm run build"
+alias nrt="npm run test"
+alias pn=pnpm
+alias bn=bun
+alias bnx=bunx
+alias bnd="bun dev"
+alias cna="bunx create-next-app@latest"
+alias bni="bun run index.ts"
+alias next-init='f() { bunx create-next-app ~/code/playground/"$1" --eslint --app --use-bun --ts --tailwind; cd ~/code/playground/"$1" && code .; }; f'
+
+# Docker
+alias dc='docker-compose'
+alias d='docker'
+
+# Kubernetes
+alias k='kubectl'
+alias kctx="kubectl ctx"
+alias kns="kubectl ns"
+
+# Terminal utilities
+alias ls='eza --color=auto --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
+alias cat="bat"
+alias duh='du -h -d1 | sort -hr'
+alias ports='lsof -i -P -n | grep LISTEN'
+alias v="vim"
+alias ff="fzf"
+alias bi="brew install"
+
+# Config files
+alias reload='source ~/.zshrc'
+alias zc='vim ~/.zshrc_default'
+alias zcl='vim ~/.zshrc_local'
+alias nv="nvim ."
+alias nvim-config="nvim ~/.config/nvim"
+alias hosts='sudo vi /etc/hosts'
+
+# System
+alias flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
+alias localip="ipconfig getifaddr en0"
+
+#-------------------------------------
+# PLUGINS
+#-------------------------------------
+plugins=(git  zsh-autocomplete)
+
+#-------------------------------------
+# ENVIRONMENT VARIABLES
+#-------------------------------------
+# Golang
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+#-------------------------------------
+# EXTERNAL SOURCES
+#-------------------------------------
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Homebrew packages
+source "/opt/homebrew/opt/spaceship/spaceship.zsh"
+source "/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# source "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source $HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+source $HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh
+
+# Bun completions
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Zoxide
+eval "$(zoxide init zsh)"
+
+
+
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"

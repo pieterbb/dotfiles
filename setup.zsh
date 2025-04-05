@@ -23,6 +23,8 @@ cd ~
 
 mkdir -p ~/code/projects
 mkdir -p ~/code/playground
+mkdir -p ~/code/scripts
+mkdir -p ~/code/notes
 
 echo "Creating symlinks for dotfiles..."
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
@@ -175,12 +177,9 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Show path bar
 defaults write com.apple.finder ShowPathbar -bool true
+
 # Show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
-
-# Wipe all (default) app icons from the Dock
-defaults write com.apple.dock persistent-apps -array
-killall Dock
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
@@ -195,7 +194,6 @@ defaults write com.apple.dock showhidden -bool true
 
 # Don't show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
-
 
 
 echo "\nDone! \n"
