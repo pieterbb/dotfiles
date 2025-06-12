@@ -50,7 +50,7 @@ echo "Installing packages from Brewfile..."
 export HOMEBREW_BUNDLE_WORK_MODE=$WORK_MODE
 
 # Install all packages from the Brewfile (in current directory)
-brew bundle
+brew bundle --file=~/.dotfiles/Brewfile
 
 # ---------------------------------------------
 # Create SSH key
