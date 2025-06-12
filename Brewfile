@@ -50,6 +50,7 @@ brew "starship"
 # Zsh Enhancements
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
+brew "zsh-autocomplete"
 brew "zsh-you-should-use"
 
 # GUI Applications
@@ -66,8 +67,12 @@ cask "docker"
 cask "keka"
 cask "sloth"
 cask "stats"
+cask "shottr"
 cask "sublime-text"
+cask "bruno"
+cask "proxyman"
 cask "obsidian"
+cask "freelens"
 cask "vlc", args: { work_mode: false }
 
 # Fonts

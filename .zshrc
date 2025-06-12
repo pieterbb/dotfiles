@@ -2,7 +2,7 @@
 #-------------------------------------
 # Default configurations
 #-------------------------------------
-source ~/.zshrc_default
+source $HOME/.dotfiles/.zshrc_default
 
 #-------------------------------------
 # Local configurations

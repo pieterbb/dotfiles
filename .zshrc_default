@@ -28,10 +28,10 @@ clear
 
 #zstyle :compinstall filename '~/.zshrc'
 
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-autoload -Uz compinit
-compinit
+# autoload -U +X compinit && compinit
+# autoload -U +X bashcompinit && bashcompinit
+# autoload -Uz compinit
+# compinit
 
 # End of lines added by compinstall
 
@@ -99,34 +99,7 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-#-------------------------------------
-# FUNCTIONS
-#-------------------------------------
-# Yazi file manager with directory tracking
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
 
-# CD with ls
-function cd() {
-  builtin cd "$@" && ls
-}
-
-# Create directory and cd into it simultaneously
-function mkcd() { mkdir -p "$1" && cd "$1"; }
-
-# Prettier git log with current branch
-function git-log-branch() {
-  git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all $(git symbolic-ref --short HEAD)
-}
-
-# Navigate to root of git repository
-function cdg() { cd "$(git rev-parse --show-toplevel 2>/dev/null || echo .)" }
 
 #-------------------------------------
 # ALIASES
@@ -179,15 +152,18 @@ alias d='docker'
 alias k='kubectl'
 alias kctx="kubectl ctx"
 alias kns="kubectl ns"
+alias hf="helmfile"
+alias h="helm"
 
 # Terminal utilities
-alias ls='eza --color=auto --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
+alias ls='eza --color=auto --long --git --icons=always --no-time --no-user --no-permissions'
 alias cat="bat"
 alias duh='du -h -d1 | sort -hr'
 alias ports='lsof -i -P -n | grep LISTEN'
 alias v="vim"
 alias ff="fzf"
 alias bi="brew install"
+
 
 # Config files
 alias reload='source ~/.zshrc'
@@ -201,10 +177,43 @@ alias hosts='sudo vi /etc/hosts'
 alias flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
 alias localip="ipconfig getifaddr en0"
 
+
+
+#-------------------------------------
+# FUNCTIONS
+#-------------------------------------
+# Yazi file manager with directory tracking
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# CD with ls
+function cd() {
+  builtin cd "$@" && ls
+}
+
+# Create directory and cd into it simultaneously
+function mkcd() { mkdir -p "$1" && cd "$1"; }
+
+# Prettier git log with current branch
+function git-log-branch() {
+  git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all $(git symbolic-ref --short HEAD)
+}
+
+# Navigate to root of git repository
+function cdg() { cd "$(git rev-parse --show-toplevel 2>/dev/null || echo .)" }
+
+
+
 #-------------------------------------
 # PLUGINS
 #-------------------------------------
-plugins=(git  zsh-autocomplete)
+plugins=(git zsh-autocomplete zsh-syntax-highlighting zsh-autosuggestions)
 
 #-------------------------------------
 # ENVIRONMENT VARIABLES
@@ -227,11 +236,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Homebrew packages
-source "/opt/homebrew/opt/spaceship/spaceship.zsh"
-source "/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-# source "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+#source "/opt/homebrew/opt/spaceship/spaceship.zsh"
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source $HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh
+
+
 
 # Bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
@@ -245,3 +256,5 @@ eval "$(zoxide init zsh)"
 
 
 export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
+
+eval "$(starship init zsh)"
