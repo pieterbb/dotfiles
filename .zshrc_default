@@ -237,10 +237,10 @@ export NVM_DIR="$HOME/.nvm"
 
 # Homebrew packages
 #source "/opt/homebrew/opt/spaceship/spaceship.zsh"
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source $HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+source /usr/local/share/zsh-you-should-use/you-should-use.plugin.zsh
 
 
 
@@ -255,6 +255,6 @@ eval "$(zoxide init zsh)"
 
 
 
-export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
+export PATH="/opt/homebrew/opt/node/bin:$PATH"
 
 eval "$(starship init zsh)"

@@ -1,4 +1,4 @@
-# Core Utils
+	# Core Utils
 brew "coreutils"
 
 # Special case for bun requires a tap first
