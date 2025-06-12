@@ -71,6 +71,9 @@ echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed2
 
 ssh-add -K ~/.ssh/id_ed25519
 
+ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+
 echo "\nDone! \n"
 
 # ---------------------------------------------
@@ -194,6 +197,11 @@ defaults write com.apple.dock showhidden -bool true
 
 # Don't show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
+
+# Set git to use SSH instead of HTTPS
+git config --global --add url."git@github.com:".insteadOf "https://github.com/"
+
+
 
 
 echo "\nDone! \n"

@@ -16,6 +16,7 @@ brew "rust"
 
 # Kubernetes
 brew "helm"
+brew "helmfile"
 brew "kubernetes-cli"
 brew "kubectx"
 
@@ -58,7 +59,6 @@ cask "firefox"
 cask "google-chrome"
 cask "github"
 cask "visual-studio-code"
-cask "cursor"
 cask "raycast"
 cask "rectangle"
 cask "mockoon"
@@ -72,19 +72,18 @@ cask "sublime-text"
 cask "bruno"
 cask "proxyman"
 cask "obsidian"
-cask "freelens"
-cask "vlc", args: { work_mode: false }
+cask "db-browser-for-sqlite"
+cask "spotify", args: { work_mode: false }
 
 # Fonts
-tap "homebrew/cask-fonts"
 cask "font-fira-mono-nerd-font"
+cask "font-inconsolata-nerd-font"
+cask "font-fira-code-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
 
 # Personal applications (non-work mode)
+cask "vlc", args: { work_mode: false }
 cask "notion", args: { work_mode: false }
-cask "telegram", args: { work_mode: false }
-cask "cleanshot", args: { work_mode: false }
 cask "whatsapp", args: { work_mode: false }
 cask "qbittorrent", args: { work_mode: false }
 cask "calibre", args: { work_mode: false }
-cask "db-browser-for-sqlite", args: { work_mode: false }
-cask "spotify", args: { work_mode: false }
