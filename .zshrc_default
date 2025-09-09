@@ -16,26 +16,10 @@ setopt SHARE_HISTORY
 # Add timestamp to history
 setopt EXTENDED_HISTORY
 
-# Clear screen after loading
-clear
-
 #-------------------------------------
 # COMPLETION SETTINGS
 #-------------------------------------
-# The following lines were added by compinstall
-
-
-
-#zstyle :compinstall filename '~/.zshrc'
-
-# autoload -U +X compinit && compinit
-# autoload -U +X bashcompinit && bashcompinit
-# autoload -Uz compinit
-# compinit
 bindkey -M vicmd ' ' self-insert
-
-
-# End of lines added by compinstall
 
 # Enable menu selection when pressing TAB multiple times
 zstyle ':completion:*' menu select
@@ -63,8 +47,6 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 
 
-# Use different colors for different file types in completion
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Load module for menu completion
 zmodload zsh/complist
@@ -74,8 +56,6 @@ zmodload zsh/complist
 #-------------------------------------
 # KEY BINDINGS
 #-------------------------------------
-# Enable vi mode
-#bindkey -v
 
 # Add vim-like navigation in the completion menu
 bindkey -M menuselect 'h' vi-backward-char
@@ -215,7 +195,6 @@ function cdg() { cd "$(git rev-parse --show-toplevel 2>/dev/null || echo .)" }
 #-------------------------------------
 # PLUGINS
 #-------------------------------------
-plugins=(git zsh-autocomplete zsh-syntax-highlighting zsh-autosuggestions)
 
 #-------------------------------------
 # ENVIRONMENT VARIABLES
@@ -255,7 +234,6 @@ source $HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh
 eval "$(zoxide init zsh)"
 
 
-
 export PATH="/opt/homebrew/opt/node/bin:$PATH"
 
 eval "$(starship init zsh)"
@@ -266,4 +244,3 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
-export PATH="$HOME/.local/bin:$PATH"
