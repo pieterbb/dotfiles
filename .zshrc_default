@@ -111,6 +111,8 @@ alias gw="commit wip"
 alias glb='git-log-branch'
 alias g="git"
 alias logline='git log --graph --pretty=tformat:"%Cred%h%Creset %C(bold blue)%<(20,trunc)%an%Creset %C(auto)%d%Creset %s %Cgreen(%cr) "'
+alias gsw='git switch'
+alias gswm='git switch main'
 
 # Node/JavaScript tools
 alias nr="npm run"
@@ -118,6 +120,11 @@ alias nrs="npm run start"
 alias nrd="npm run dev"
 alias nrb="npm run build"
 alias nrt="npm run test"
+alias pnrd="pnpm run dev"
+alias pnr="pnpm run"
+alias pnb="pnpm run build"
+alias pnt="pnpm run test"
+
 alias pn=pnpm
 alias bn=bun
 alias bnx=bunx
